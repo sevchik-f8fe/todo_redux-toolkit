@@ -1,6 +1,6 @@
 import { useDispatch } from "react-redux";
 import { Checkbox, ListItem, ListItemText, FormControlLabel, Button } from "@mui/material";
-import { removeTodo, toggleTodo } from "../store/todoSlice";
+import { deleteTodo, toggleStatus } from "../store/todoSlice";
 
 const TodoItem = ({ todo }) => {
     const dispatch = useDispatch();
@@ -19,14 +19,14 @@ const TodoItem = ({ todo }) => {
         }}>
             <FormControlLabel
                 value="top"
-                control={<Checkbox onChange={() => dispatch(toggleTodo({ id: todo.id }))} checked={todo.completed} />}
+                control={<Checkbox onChange={() => dispatch(toggleStatus({ id: todo.id }))} checked={todo.completed} />}
                 label={<ListItemText
-                    primary={todo.value}
-                    secondary={new Date(todo.id).toLocaleDateString()}
+                    primary={todo.title}
+                // secondary={new Date(todo.id).toLocaleDateString()}
                 />}
                 labelPlacement="end"
             />
-            <Button onClick={() => dispatch(removeTodo({ id: todo.id }))} variant="outlined" color="error" size="small" sx={{
+            <Button onClick={() => dispatch(deleteTodo({ id: todo.id }))} variant="outlined" color="error" size="small" sx={{
                 minWidth: 25,
                 padding: 0,
                 lineHeight: 1.2,
